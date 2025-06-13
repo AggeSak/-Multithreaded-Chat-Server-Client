@@ -16,8 +16,8 @@ int main() {
     // Step 2: Set up the server address
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(8080);  // Port 8080
-    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");  // Localhost
+    server_addr.sin_port = htons(4242);  // Port 8080
+    server_addr.sin_addr.s_addr = inet_addr("3.231.240.96");  // Localhost
 
     // Step 3: Connect to the server
     if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
