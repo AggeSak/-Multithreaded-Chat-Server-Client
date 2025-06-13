@@ -1,28 +1,19 @@
-#include <winsock2.h>
-#include <ws2tcpip.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
 
 int main() {
-    WSADATA wsaData;
-    int iResult;
-
-    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
-    if (iResult != 0) {
-        printf("WSAStartup failed: %d\n", iResult);
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    
+    if (sockfd < 0) {
+        perror("Socket creation failed");
         return 1;
     }
 
-    SOCKET sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (sockfd == INVALID_SOCKET) {
-        printf("Socket creation failed: %d\n", WSAGetLastError());
-        WSACleanup();
-        return 1;
-    }
+    printf("Socket created successfully! FD: %d\n", sockfd);
 
-    printf("Socket created successfully! FD: %llu\n", (unsigned long long)sockfd);
-
-    closesocket(sockfd);
-    WSACleanup();
-
+    close(sockfd);  // Don't forget to close sockets when done
     return 0;
 }
