@@ -6,12 +6,15 @@
 #include <sys/socket.h>
 
 int main() {
-    // Step 1: Create a TCP socket
+    /* Step 1: Create a socket  (TCP here)
+    sockfd = socket(domain,type,protocol)*/
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         perror("Socket creation failed");
         return 1;
     }
+
+    /*Feature build here a setsokopt so it let e reuse it */
 
     // Step 2: Set up the server address
     struct sockaddr_in server_addr;
