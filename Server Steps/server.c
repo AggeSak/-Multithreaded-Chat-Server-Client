@@ -24,7 +24,7 @@ int main() {
     // 2. Bind
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(8080);
+    address.sin_port = htons(9000);
 
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
         perror("Bind failed");
@@ -38,7 +38,7 @@ int main() {
         close(server_fd);
         exit(EXIT_FAILURE);
     }
-    printf("Listening on port 8080...\n");
+    printf("Listening on port 9000...\n");
 
     // 4. Accept
     client_fd = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen);
